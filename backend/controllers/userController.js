@@ -27,5 +27,17 @@ const createUser = asyncHandler(async (req, res) => {
         throw new Error("Invalid user data");
     }
 });
+const loginUser = asyncHandler(async (req, res)=> {
+    const {email, password} = req.body;
 
-export default createUser;
+    const existingUser = await User.findOne({email});
+    if(existingUser) {
+        const isPasswordValid = await bcrypt.compare(password, existingUser.password)
+        if(isPasswordValid){
+            createToken(res, existingUser._id)
+        res.status(201).json({_id: existingUser._id, username: existingUser.username, email: existingUser.email, isAdmin: existingUser.isAdmin});
+        return;
+        }
+    }
+})
+export { createUser, loginUser };
