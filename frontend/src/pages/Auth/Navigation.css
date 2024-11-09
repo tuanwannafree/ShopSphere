@@ -1,3 +1,6 @@
+body{
+  background-color: #1b1b1b;
+}
 #navigation-container {
     width: 4%;
     transition: width 0.3s ease-in-out;
