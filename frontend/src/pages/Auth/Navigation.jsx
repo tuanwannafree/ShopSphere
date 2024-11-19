@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useLoginMutation } from "../redux/api/userApiSlice";
+import { useLogoutMutation } from "../redux/api/userApiSlice";
 import { logout } from "../redux/features/auth/authSlice";
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -31,7 +31,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { logoutApiCall } = useLoginMutation();
+  const [ logoutApiCall ] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
@@ -115,7 +115,7 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 mt-2 mr-14 space-y-2 bg-white text-gray-600 
+            className={`absolute right-0 mt-2 mr-14 space-y-2 bg-gray-800 text-gray-300 
             ${!userInfo.isAdmin ? "-top-20" : "-top-80"}`}
           >
             {userInfo.isAdmin && (
@@ -123,7 +123,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/dashboard"
-                    className="black px-4 py-2 hover:bg-gray-100"
+                    className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     DashBoard
                   </Link>
@@ -131,15 +131,15 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/productlist"
-                    className="black px-4 py-2 hover:bg-gray-100"
+                    className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     Products
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/admin/categorylist"
-                    className="black px-4 py-2 hover:bg-gray-100"
+                    to="/admin/category"
+                    className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     Category
                   </Link>
@@ -147,7 +147,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/orderlist"
-                    className="black px-4 py-2 hover:bg-gray-100"
+                    className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     Orders
                   </Link>
@@ -155,7 +155,7 @@ const Navigation = () => {
                 <li>
                   <Link
                     to="/admin/userlist"
-                    className="black px-4 py-2 hover:bg-gray-100"
+                    className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     Users
                   </Link>
@@ -166,7 +166,7 @@ const Navigation = () => {
             <li>
               <Link
                 to="/admin/profile"
-                className="black px-4 py-2 hover:bg-gray-100"
+                className="black px-5 py-2 hover:bg-gray-100 hover:text-gray-900"
               >
                 Profile
               </Link>
@@ -175,7 +175,7 @@ const Navigation = () => {
               <Link
                 to="/admin/logout"
                 onClick={logoutHandler}
-                className="black px-4 py-2 hover:bg-gray-100"
+                className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
               >
                 Logout
               </Link>
@@ -197,7 +197,7 @@ const Navigation = () => {
           </li>
           <li>
             <Link
-              to="/login"
+              to="/register"
               className="flex items-center transition-transform transform hover:translate-x-2"
             >
               <AiOutlineUserAdd className="mr-2 mt-[3rem]" size={26} />
