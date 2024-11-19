@@ -88,7 +88,7 @@ const Login = () => {
             <p className="text-white">
               New Customer ?{" "}
               <Link
-                to={redirect ? `register?redirect=${redirect}` : "/register"}
+                to="/register"
                 className="text-pink-500 hover:underline"
               >
                 Register
