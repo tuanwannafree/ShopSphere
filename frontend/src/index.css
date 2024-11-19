@@ -5,9 +5,10 @@
 body {
     background: #0f0f10;
     color: #fff;
-  }
+}
   
 input,
 textarea {
-    color: #000;
+  background-color: rgba(128, 128, 128, 0);
+    color: #fff;
   }
