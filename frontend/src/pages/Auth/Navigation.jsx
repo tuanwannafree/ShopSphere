@@ -165,20 +165,19 @@ const Navigation = () => {
 
             <li>
               <Link
-                to="/admin/profile"
+                to="/profile"
                 className="black px-5 py-2 hover:bg-gray-100 hover:text-gray-900"
               >
                 Profile
               </Link>
             </li>
             <li>
-              <Link
-                to="/admin/logout"
+              <button
                 onClick={logoutHandler}
                 className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
               >
                 Logout
-              </Link>
+              </button>
             </li>
           </ul>
         )}

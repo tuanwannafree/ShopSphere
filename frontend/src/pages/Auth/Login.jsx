@@ -24,16 +24,16 @@ const Login = () => {
   }, [navigate, redirect, userInfo]);
 
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-        const res = await login({email, password}).unwrap()
-       console.log(res)
-       dispatch(setCredientials({...res})) 
+      const res = await login({ email, password }).unwrap();
+      console.log(res);
+      dispatch(setCredientials({ ...res }));
     } catch (error) {
-        toast.error(error?.data?.message || error.message)
+      toast.error(error?.data?.message || error.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -83,19 +83,22 @@ const Login = () => {
               {isLoading ? "Signing In..." : "Sign In"}
             </button>
             {isLoading && <Loader />}
-          </form >
+          </form>
           <div className="mt-4">
             <p className="text-white">
               New Customer ?{" "}
-              <Link
-                to="/register"
-                className="text-pink-500 hover:underline"
-              >
+              <Link to="/register" className="text-pink-500 hover:underline">
                 Register
               </Link>
             </p>
           </div>
         </div>
+
+        <img
+          src="https://plus.unsplash.com/premium_photo-1676009551532-c73be6605e3a?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+          className="h-[40rem] w-[35%] right-0 absolute xl:block sm:hidden rounded-lg"
+        />
       </section>
     </div>
   );
