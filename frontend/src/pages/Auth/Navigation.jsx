@@ -138,7 +138,7 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link
-                    to="/admin/category"
+                    to="/admin/categorylist"
                     className="black px-4 py-2 hover:bg-gray-100 hover:text-gray-900"
                   >
                     Category
