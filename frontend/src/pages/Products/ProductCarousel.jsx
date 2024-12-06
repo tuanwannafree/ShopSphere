@@ -54,12 +54,38 @@ const ProductCarousel = () => {
                   className="w-full rounded-lg object-cover h-[30rem]"
                 />
                 <div className="flex justify-between w-[20rem]">
-                    <div className="one">
-                        <h2>{name}</h2>
-                        <p>${price}</p> <br /><br />
-                        <p className="w-[25rem]">{description.substring(0, 100)}...</p>
+                  <div className="one">
+                    <h2>{name}</h2>
+                    <p>${price}</p> <br />
+                    <br />
+                    <p className="w-[25rem]">
+                      {description.substring(0, 150)}...
+                    </p>
+                  </div>
+                  <div className="flex justify-between w-[20rem]">
+                    <div className="one w-[10rem]">
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaStore className="mr-2 text-white" />Brand: {brand}
+                      </h1>
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaClock className="mr-2 text-white" />Added: {" "} {moment(createdAt).fromNow()}
+                      </h1>
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaStar className="mr-2 text-white" />Reviews: {" "} {numReviews}
+                      </h1>
                     </div>
-                    
+                    <div className="two">
+                      <h1 className="flex items-center mb-6  w-[10rem]">
+                        <FaStar className="mr-2 text-white" />Ratings: {Math.round(ratings)}
+                      </h1>
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaShoppingCart className="mr-2 text-white" />Quantity: {quantity}
+                      </h1>
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaBox className="mr-2 text-white" />In Stock: {countInStock}
+                      </h1>
+                    </div>
+                  </div>
                 </div>
               </div>
             )
