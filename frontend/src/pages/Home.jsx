@@ -16,8 +16,9 @@ const Home = () => {
         <Loader />
       ) : isError ? (
         <Message variant="danger">
-          {isError?.data.message || isError.error}
-        </Message>
+        {error?.data?.message || error?.message || "An unexpected error occurred"}
+      </Message>
+      
       ) : (
         <>
           <div className="flex justify-between items-center">
