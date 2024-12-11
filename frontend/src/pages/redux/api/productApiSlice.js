@@ -5,13 +5,17 @@ export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Fetch paginated products with optional keyword search
     getProducts: builder.query({
-      query: ({ keyword }) => ({
-        url: PRODUCT_URL,
-        params: { keyword },
-      }),
+      query: ({ keyword }) => {
+        const params = keyword ? { keyword } : {};  // Only add keyword if it's defined
+        return {
+          url: PRODUCT_URL,
+          params,  // Pass the params object dynamically
+        };
+      },
       keepUnusedDataFor: 5,
       providesTags: ["Product"],
     }),
+    
 
     // Fetch a single product by ID
     getProductById: builder.query({
@@ -20,7 +24,12 @@ export const productApiSlice = apiSlice.injectEndpoints({
         { type: "Product", id: productId },
       ],
     }),
-
+    getProductDetails: builder.query({
+      query: (productId) => ({
+        url: `${PRODUCT_URL}/${productId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
     // Fetch all products (for admin or full access use case)
     getAllProducts: builder.query({
       query: () => `${PRODUCT_URL}/allProducts`,
@@ -97,6 +106,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetProductsQuery,
+  useGetProductDetailsQuery,
   useGetProductByIdQuery,
   useGetAllProductsQuery,
   useCreateProductMutation,
