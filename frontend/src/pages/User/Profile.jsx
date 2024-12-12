@@ -5,7 +5,6 @@ import Loader from "../../components/Loader";
 import { setCredientials } from "../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { useProfileMutation } from "../redux/api/userApiSlice";
-import { hashSync } from "bcryptjs";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
