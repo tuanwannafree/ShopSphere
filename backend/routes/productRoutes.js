@@ -25,7 +25,7 @@ router
   .route("/:id/reviews")
   .post(authenticate, authorizeAdmin,checkId ,createProductReview);
 
-router.get('/top', fetchTopProducts)
+// router.get('/top', fetchTopProducts)
 router.get('/new', fetchNewProducts)
 router
   .route("/:id")

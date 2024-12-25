@@ -91,10 +91,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
     }),
 
     // Fetch top-rated products
-    getTopProducts: builder.query({
-      query: () => `${PRODUCT_URL}/top`,
-      keepUnusedDataFor: 5,
-    }),
+    // getTopProducts: builder.query({
+    //   query: () => `${PRODUCT_URL}/top`,
+    //   keepUnusedDataFor: 5,
+    // }),
 
     // Fetch newly added products
     getNewProducts: builder.query({
