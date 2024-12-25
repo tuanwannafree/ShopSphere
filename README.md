@@ -2,7 +2,10 @@
 
 ShopSphere is a full-stack e-commerce website built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It provides users with a seamless shopping experience and includes features such as product listings, shopping cart functionality(to be implemented), secure payment integration (to be implemented), and an admin panel for managing the store (to be implemented).
 
----
+![Screenshot 2024-12-25 105159](https://github.com/user-attachments/assets/06a4839a-68c9-4484-b99d-a352bd5bebfb)
+
+
+
 
 ## Features
 
