@@ -13,36 +13,39 @@ const Profile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
-  const [updateProfile, { isLoading: loadingUpdateProfile }] =
-    useProfileMutation();
+  const [updateProfile, { isLoading: loadingUpdateProfile }] = useProfileMutation();
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    if (userInfo) {
       setUsername(userInfo.username);
       setEmail(userInfo.email);
-    },
-    userInfo.email,
-    userInfo.username
-  );
+    }
+  }, [userInfo]);
 
   const dispatch = useDispatch();
 
-const submitHandler = async (e) => {
-  e.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-  if (password !== confirmPassword) {
-    toast.error("Password doesnot match");
-  } else {
-    try {
-      const res = await updateProfile({ _id:userInfo._id, username, email, password }).unwrap();
-      dispatch(setCredientials({...res}));
-      toast.success("Profile updated successfully ");
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.data?.message || err.message);
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
     }
-  }
-};
+
+    try {
+      const res = await updateProfile({
+        _id: userInfo._id,
+        username,
+        email,
+        password,
+      }).unwrap();
+      dispatch(setCredientials({ ...res }));
+      toast.success("Profile updated successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error(err?.data?.message || "An unexpected error occurred.");
+    }
+  };
 
   return (
     <div className="container mx-auto p-4 mt-[6rem]">
@@ -94,12 +97,16 @@ const submitHandler = async (e) => {
               <button type="submit" className="bg-pink-500 text-white px-4 py-2 mt-2 rounded hover:bg-pink-600">
                 Update
               </button>
-
-              <Link to="/user-orders" className="bg-pink-600 text-white px-4 py-2 mt-2 rounded hover:bg-pink-700">My Orders</Link>
+              <Link to="/user-orders" className="bg-pink-600 text-white px-4 py-2 mt-2 rounded hover:bg-pink-700">
+                My Orders
+              </Link>
             </div>
-
-            {loadingUpdateProfile && <Loader />}
           </form>
+          {loadingUpdateProfile && (
+            <div className="flex justify-center mt-4">
+              <Loader />
+            </div>
+          )}
         </div>
       </div>
     </div>
