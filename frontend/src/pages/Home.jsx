@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery } from "../pages/redux/api/productApiSlice";
-import Loader from "../components/Loader.jsx";
-import Message from "../components/Message.jsx";
-import Header from "../components/Header.jsx";
-import Product from "./Products/Product.jsx";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import Header from "../components/Header";
+import Product from "./Products/Product";
 
 const Home = () => {
   const { keyword } = useParams();
@@ -16,9 +16,8 @@ const Home = () => {
         <Loader />
       ) : isError ? (
         <Message variant="danger">
-        {error?.data?.message || error?.message || "An unexpected error occurred"}
-      </Message>
-      
+          {isError.error}
+        </Message>
       ) : (
         <>
           <div className="flex justify-between items-center">

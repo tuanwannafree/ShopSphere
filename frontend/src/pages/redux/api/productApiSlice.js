@@ -3,112 +3,99 @@ import { apiSlice } from "./apiSlice";
 
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // Fetch paginated products with optional keyword search
     getProducts: builder.query({
-      query: ({ keyword }) => {
-        const params = keyword ? { keyword } : {};  // Only add keyword if it's defined
-        return {
-          url: PRODUCT_URL,
-          params,  // Pass the params object dynamically
-        };
-      },
+      query: ({ keyword }) => ({
+        url: `${PRODUCT_URL}`,
+        params: { keyword },
+      }),
       keepUnusedDataFor: 5,
-      providesTags: ["Product"],
+      providesTags: ["Products"],
     }),
-    
 
-    // Fetch a single product by ID
     getProductById: builder.query({
       query: (productId) => `${PRODUCT_URL}/${productId}`,
       providesTags: (result, error, productId) => [
         { type: "Product", id: productId },
       ],
     }),
+
+    allProducts: builder.query({
+      query: () => `${PRODUCT_URL}/allProducts`,
+    }),
+
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCT_URL}/${productId}`,
       }),
       keepUnusedDataFor: 5,
     }),
-    // Fetch all products (for admin or full access use case)
-    getAllProducts: builder.query({
-      query: () => `${PRODUCT_URL}/allProducts`,
-      providesTags: ["Product"],
-    }),
 
-    // Create a new product
     createProduct: builder.mutation({
       query: (productData) => ({
-        url: PRODUCT_URL,
+        url: `${PRODUCT_URL}`,
         method: "POST",
         body: productData,
       }),
       invalidatesTags: ["Product"],
     }),
 
-    // Update an existing product
     updateProduct: builder.mutation({
       query: ({ productId, formData }) => ({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
         body: formData,
       }),
-      invalidatesTags: (result, error, { productId }) => [
-        { type: "Product", id: productId },
-      ],
     }),
 
-    // Upload product image
     uploadProductImage: builder.mutation({
       query: (data) => ({
-        url: UPLOAD_URL,
+        url: `${UPLOAD_URL}`,
         method: "POST",
         body: data,
       }),
     }),
 
-    // Delete a product
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `${PRODUCT_URL}/${productId}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, productId) => [
-        { type: "Product", id: productId },
-      ],
+      providesTags: ["Product"],
     }),
 
-    // Create a review for a product
     createReview: builder.mutation({
-      query: (reviewData) => ({
-        url: `${PRODUCT_URL}/${reviewData.productId}/reviews`,
+      query: (data) => ({
+        url: `${PRODUCT_URL}/${data.productId}/reviews`,
         method: "POST",
-        body: reviewData,
+        body: data,
       }),
-      invalidatesTags: (result, error, { productId }) => [
-        { type: "Product", id: productId },
-      ],
     }),
 
-    // Fetch top-rated products
-    // getTopProducts: builder.query({
-    //   query: () => `${PRODUCT_URL}/top`,
-    //   keepUnusedDataFor: 5,
-    // }),
+    getTopProducts: builder.query({
+      query: () => `${PRODUCT_URL}/top`,
+      keepUnusedDataFor: 5,
+    }),
 
-    // Fetch newly added products
     getNewProducts: builder.query({
       query: () => `${PRODUCT_URL}/new`,
       keepUnusedDataFor: 5,
+    }),
+
+    getFilteredProducts: builder.query({
+      query: ({ checked, radio }) => ({
+        url: `${PRODUCT_URL}/filtered-products`,
+        method: "POST",
+        body: { checked, radio },
+      }),
     }),
   }),
 });
 
 export const {
+  useGetProductByIdQuery,
   useGetProductsQuery,
   useGetProductDetailsQuery,
-  useGetProductByIdQuery,
-  useGetAllProductsQuery,
+  useAllProductsQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
@@ -116,4 +103,5 @@ export const {
   useGetTopProductsQuery,
   useGetNewProductsQuery,
   useUploadProductImageMutation,
+  useGetFilteredProductsQuery,
 } = productApiSlice;

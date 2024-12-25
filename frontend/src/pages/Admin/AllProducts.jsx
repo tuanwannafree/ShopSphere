@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { useGetAllProductsQuery } from "../redux/api/productApiSlice";
+import { useAllProductsQuery } from "../redux/api/productApiSlice";
 import AdminMenu from "./AdminMenu";
 
 const AllProducts = () => {
-  const { data: products, isLoading, isError } = useGetAllProductsQuery();
+  const { data: products, isLoading, isError } = useAllProductsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;

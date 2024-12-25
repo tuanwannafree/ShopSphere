@@ -12,7 +12,7 @@ import {
   fetchAllProducts,
   createProductReview,
   fetchTopProducts,
-  fetchNewProducts
+  fetchNewProducts,
 } from "../controllers/productController.js";
 
 router
@@ -23,10 +23,10 @@ router
 router.route("/allproducts").get(fetchAllProducts);
 router
   .route("/:id/reviews")
-  .post(authenticate, authorizeAdmin,checkId ,createProductReview);
+  .post(authenticate, authorizeAdmin, checkId, createProductReview);
 
-// router.get('/top', fetchTopProducts)
-router.get('/new', fetchNewProducts)
+router.get("/top", fetchTopProducts);
+router.get("/new", fetchNewProducts);
 router
   .route("/:id")
   .get(fetchProductsById)
