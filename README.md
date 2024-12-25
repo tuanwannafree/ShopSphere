@@ -71,7 +71,8 @@ Ensure you have the following installed on your system:
 
    # Start the frontend client
    cd frontend
-   npm run frontend
+   npm run frontend 
+   ** Try to run both frontend and backend concurrently even if you are only interested in working with frontend for the website to run smoothly as frontend is heavily dependent on the backend
    ```
 
 5. **Access the Application:**
